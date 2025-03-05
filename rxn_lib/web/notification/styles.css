@@ -1,0 +1,188 @@
+#notiback {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 400px;
+    width: 100%;
+    min-width: 250px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    word-wrap: break-word;
+    white-space: normal;
+    line-height: 1.4;
+    visibility: hidden;
+    opacity: 0;
+    transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+#notif-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+@keyframes swipein {
+    0% {
+        top: -100px;
+        opacity: 0;
+        visibility: hidden;
+    }
+    100% {
+        top: 20px;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes swipeout {
+    0% {
+        top: 20px;
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        top: -100px;
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+#notiback.show-notif {
+    animation: swipein 0.5s ease-in-out forwards;
+}
+
+#notiback.hide-notif {
+    animation: swipeout 0.5s ease-in-out forwards;
+}
+
+.border-red {
+    border-left: 5px solid red;
+}
+
+.border-blue {
+    border-left: 5px solid blue;
+}
+
+.border-green {
+    border-left: 5px solid green;
+}
+
+.border-rainbow {
+    border-left: 5px solid transparent;
+    background-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400% 400%;
+    animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.top {
+    top: 20px;
+}
+
+.bottom {
+    bottom: 20px;
+}
+
+.left {
+    left: 20px;
+}
+
+.right {
+    right: 20px;
+}
+
+.center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.center-left {
+    left: 20px;
+}
+
+.center-right {
+    right: 20px;
+}
+
+.top-left {
+    top: 20px;
+    left: 20px;
+}
+
+.top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+.bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+#notif-icon {
+    font-size: 30px;
+    margin-right: 24px;
+}
+
+#notiback {
+    padding: 16px 24px;
+}
+
+.border-red { border-left: 5px solid red; }
+.border-green { border-left: 5px solid green; }
+.border-blue { border-left: 5px solid blue; }
+.border-yellow { border-left: 5px solid yellow; }
+.border-orange { border-left: 5px solid orange; }
+.border-purple { border-left: 5px solid purple; }
+.border-pink { border-left: 5px solid pink; }
+.border-brown { border-left: 5px solid brown; }
+.border-gray { border-left: 5px solid gray; }
+.border-black { border-left: 5px solid black; }
+.border-white { border-left: 5px solid white; }
+.border-beige { border-left: 5px solid beige; }
+.border-maroon { border-left: 5px solid maroon; }
+.border-olive { border-left: 5px solid olive; }
+.border-teal { border-left: 5px solid teal; }
+.border-lime { border-left: 5px solid lime; }
+.border-cyan { border-left: 5px solid cyan; }
+.border-magenta { border-left: 5px solid magenta; }
+.border-indigo { border-left: 5px solid indigo; }
+.border-violet { border-left: 5px solid violet; }
+.border-turquoise { border-left: 5px solid turquoise; }
+.border-gold { border-left: 5px solid gold; }
+.border-silver { border-left: 5px solid silver; }
+.border-bronze { border-left: 5px solid bronze; }
+.border-khaki { border-left: 5px solid khaki; }
+.border-lavender { border-left: 5px solid lavender; }
+.border-coral { border-left: 5px solid coral; }
+.border-peach { border-left: 5px solid peach; }
+.border-crimson { border-left: 5px solid crimson; }
+.border-chocolate { border-left: 5px solid chocolate; }
+.border-sienna { border-left: 5px solid sienna; }
+.border-salmon { border-left: 5px solid salmon; }
+.border-plum { border-left: 5px solid plum; }
+.border-slategray { border-left: 5px solid slategray; }
+.border-royalblue { border-left: 5px solid royalblue; }
+.border-mediumpurple { border-left: 5px solid mediumpurple; }
+.border-darkgreen { border-left: 5px solid darkgreen; }
+.border-darkblue { border-left: 5px solid darkblue; }
+.border-seagreen { border-left: 5px solid seagreen; }
