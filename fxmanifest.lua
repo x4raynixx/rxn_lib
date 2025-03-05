@@ -7,8 +7,14 @@ export {
     'stopResource',
     'restartResource',
     'startResource',
-    'CreateInstructionalButton',
+    'RegisterInstructionalMenu',
+    'AddInstructionalMenuButton',
+    'UnregisterInstructionalMenuButton',
+    'UnregisterInstructionalMenu',
+    'ShowInstructionalMenu',
     'showNotificationToPlayer',
+    'getFramework',
+    'ShowNotificationMenu',
 }
 
 client_scripts {

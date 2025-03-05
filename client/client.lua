@@ -146,16 +146,6 @@ function ShowInstructionalMenu(name)
     end)
 end
 
-RegisterInstructionalMenu('testShowMenu')
-
-AddInstructionalMenuButton('testShowMenu', 'Press E to accept', 'INPUT_FRONTEND_ACCEPT', nil, function()
-    print("You pressed 'Accept'!")
-end)
-
-AddInstructionalMenuButton('testShowMenu', 'Press Q to cancel', 'INPUT_FRONTEND_CANCEL', nil, function()
-    print("You pressed 'Cancel'!")
-end)
-
 local NotificationHandles = {}
 
 function ShowNotificationMenu(text, duration)
@@ -164,23 +154,34 @@ function ShowNotificationMenu(text, duration)
     AddTextComponentSubstringPlayerName(text)
     SetNotificationTextEntry("STRING")
     AddTextComponentSubstringPlayerName(text)
-    DrawNotification(false, true)
-
-    -- Czas trwania powiadomienia
-    Citizen.Wait(duration)
+    local notificationId = DrawNotification(false, true)
+    Citizen.SetTimeout(duration, function()
+        RemoveNotification(notificationId)
+    end)
 end
 
-RegisterCommand("notification", function(source, args, rawCommand)
-    local text = args[1]
-    showNotificationToPlayer(5000, 'blue', text, 'fas fa-info')
-end, false)
-
-    function showNotificationToPlayer(duration, color, message, icon)
-        SendNUIMessage({
-            action = "showNotification",
-            duration = duration,
-            color = color,
-            message = message,
-            icon = icon
-        })
+Citizen.CreateThread(function()
+    Citizen.Wait(0)
+    while true do
+        if Config.Tests.disableall == false or Config.Tests.notitest then
+            Wait(1000)
+            RegisterCommand("notification", function(source, args, rawCommand)
+                local text = args[1]
+                showNotificationToPlayer(5000, 'blue', text, 'fas fa-info')
+            end, false)
+        end
+        Wait(1000)
     end
+end)
+
+
+function showNotificationToPlayer(duration, color, message, icon)
+    SendNUIMessage({
+        action = "showNotification",
+        duration = duration,
+        color = color,
+        message = message,
+        icon = icon
+    })
+end
+
