@@ -73,7 +73,7 @@ function RegisterInstructionalMenu(name)
     }
 end
 
-function AddInstructionalMenuButton(name, text, icon, position, callback)
+function AddInstructionalMenuButton(name, text, icon, position, control, callback)
     if not InstructionalMenus[name] then return end
     local menu = InstructionalMenus[name]
     if not position then
@@ -84,6 +84,7 @@ function AddInstructionalMenuButton(name, text, icon, position, callback)
         position = position,
         text = text,
         icon = icon,
+        control = control,
         callback = callback
     })
 end
@@ -124,24 +125,23 @@ function ShowInstructionalMenu(name)
             EndScaleformMovieMethod()
         end
         CallScaleformMovieMethod(menu.scaleformHandle, 'DRAW_INSTRUCTIONAL_BUTTONS')
-        local selectPressed = false
-        while not selectPressed do
+        
+        local buttonPressed = false
+        while not buttonPressed do
             Wait(0)
             DrawScaleformMovieFullscreen(menu.scaleformHandle, 255, 255, 255, 255, 1)
-            if IsControlJustReleased(2, 201) then
-                selectPressed = true
-                local selectedButton = menu.buttons[1]
-                for _, button in ipairs(menu.buttons) do
-                    if button.position == 0 then
-                        selectedButton = button
-                        break
+            
+            for _, button in ipairs(menu.buttons) do
+                if IsControlJustReleased(2, button.control) then
+                    if button.callback then
+                        button.callback()
                     end
-                end
-                if selectedButton.callback then
-                    selectedButton.callback()
+                    buttonPressed = true
+                    break
                 end
             end
         end
+        
         SetScaleformMovieAsNoLongerNeeded(menu.scaleformHandle)
     end)
 end
