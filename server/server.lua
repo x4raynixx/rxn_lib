@@ -1,0 +1,5 @@
+Citizen.CreateThread(function ()
+    print('^1Thanks for using rxn_lib!')
+    print('^3Support us on:\nhttps://github.com/x4raynixx/rxn_lib - Leaving a star!')
+    print('^3https://discord.gg/UgSDaqgbGk - Join our discord server for support!')
+end)

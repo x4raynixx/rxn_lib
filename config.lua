@@ -2,6 +2,6 @@ Config = {}
 
 Config.Debug = true
 Config.Tests = {
-    disableall = true,
+    disableall = false,
     notitest = true,
 }

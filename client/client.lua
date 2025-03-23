@@ -1,67 +1,33 @@
+function debugPrint(msg)
+    if Config.Debug then
+        print(string.format('^3[DEBUG] ^7%s^0', msg))
+    end
+end
+
 function getFramework()
     if GetResourceState('qb-core') == 'started' then
-    return 'qb'
+    return 'qb', '^1QB-Core'
     elseif GetResourceState('es_extended') == 'started' then
-        return 'esx'
+        return 'esx', '^3ESX'
     elseif GetResourceState('qbx_core') == 'started' then
-        return 'qbox'
+        return 'qbox', '^6Qbox'
     elseif GetResourceState('ox_core') == 'started' then
-        return 'ox_core'
+        return 'ox_core', '^4OX Core'
     end
-end
 
-function getFramework_lib()
-    if GetResourceState('qb-core') == 'started' then
-    return '^1QB-Core'
-    elseif GetResourceState('es_extended') == 'started' then
-        return '^3ESX'
-    elseif GetResourceState('qbx_core') == 'started' then
-        return '^6Qbox'
-    elseif GetResourceState('ox_core') == 'started' then
-        return '^4OX Core'
-    end
+    return 'IDK', 'IDK'
 end
-
-local resfr = getFramework_lib()
 
 AddEventHandler('onClientResourceStart', function (resourceName)
     if(GetCurrentResourceName() ~= resourceName) then
       return
     end
-    Citizen.Trace('^2Success: ^3' .. resourceName .. '^2 has successfully loaded!^0\n')
-    Citizen.Trace("^5Information:^4 Don't change the resource name. If you change the resource name, the libs exports may not work^0\n")
-    if Config.Debug then
-        Citizen.Trace("^3[DEBUG] ^6Framework: You're using "..resfr.."^0\n")
-    end
-  end)
 
-function stopResource(resourceName)
-    if GetResourceState(resourceName) == 'started' then
-        print('^1Stopping resource: ^2' .. resourceName .. '^0')
-        StopResource(resourceName)
-    else
-        print('^1Error: Resource ^2' .. resourceName .. '^0 ^1is not running!^0')
-    end
-end
+    local _, frameworkLabel = getFramework()
+    print(string.format('^2Success: ^3%s^2 has successfully loaded! ^0', resourceName))
+    debugPrint(string.format('^6Framework: You are using %s^0', frameworkLabel))
+end)
 
-function restartResource(resourceName)
-    if GetResourceState(resourceName) == 'started' then
-        print('^Restarting resource: ^2' .. resourceName .. '^0')
-        StopResource(resourceName)
-        StartResource(resourceName)
-    else
-        print('^1Error: Resource ^2' .. resourceName .. '^0 ^1is not running!^0')
-    end
-end
-
-function startResource(resourceName)
-    if GetResourceState(resourceName) == 'stopped' then
-        print('^Starting resource: ^2' .. resourceName .. '^0')
-        StartResource(resourceName)
-    else
-        print('^1Error: Resource ^2' .. resourceName .. '^0 ^1is already running!^0')
-    end
-end
 local InstructionalMenus = {}
 
 function RegisterInstructionalMenu(name)
@@ -125,12 +91,12 @@ function ShowInstructionalMenu(name)
             EndScaleformMovieMethod()
         end
         CallScaleformMovieMethod(menu.scaleformHandle, 'DRAW_INSTRUCTIONAL_BUTTONS')
-        
+
         local buttonPressed = false
         while not buttonPressed do
             Wait(0)
             DrawScaleformMovieFullscreen(menu.scaleformHandle, 255, 255, 255, 255, 1)
-            
+
             for _, button in ipairs(menu.buttons) do
                 if IsControlJustReleased(2, button.control) then
                     if button.callback then
@@ -141,12 +107,10 @@ function ShowInstructionalMenu(name)
                 end
             end
         end
-        
+
         SetScaleformMovieAsNoLongerNeeded(menu.scaleformHandle)
     end)
 end
-
-local NotificationHandles = {}
 
 function ShowNotificationMenu(text, duration)
     local duration = duration or 5000
@@ -160,20 +124,12 @@ function ShowNotificationMenu(text, duration)
     end)
 end
 
-Citizen.CreateThread(function()
-    Citizen.Wait(0)
-    while true do
-        if Config.Tests.disableall == false or Config.Tests.notitest then
-            Wait(1000)
-            RegisterCommand("notification", function(source, args, rawCommand)
-                local text = args[1]
-                showNotificationToPlayer(5000, 'blue', text, 'fas fa-info')
-            end, false)
-        end
-        Wait(1000)
-    end
-end)
-
+if not Config.Tests.disableall or Config.Tests.notitest then
+    RegisterCommand("notification", function(source, args, rawCommand)
+        local text = args[1]
+        showNotificationToPlayer(5000, 'blue', text, 'fas fa-info')
+    end)
+end
 
 function showNotificationToPlayer(duration, color, message, icon)
     SendNUIMessage({
@@ -185,3 +141,13 @@ function showNotificationToPlayer(duration, color, message, icon)
     })
 end
 
+AddEventHandler('onResourceStart', function (resName)
+    if resName ~= GetCurrentResourceName() or GetCurrentResourceName() == 'rxn_lib' then
+        return
+    end
+
+    for i = 0, 10 do
+        print('^2This script has to be named rxn_lib in order for it to work!!^0')
+        Wait(100)
+    end
+end)

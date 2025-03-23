@@ -15,6 +15,7 @@ export {
     'showNotificationToPlayer',
     'getFramework',
     'ShowNotificationMenu',
+    'setVehicleGodMode',
 }
 
 client_scripts {
