@@ -1,6 +1,6 @@
 {
-  "name": "test-release-please",
-  "version": "0.0.1",
+  "name": "rxn_lib",
+  "version": "1.0.2",
   "description": "just a test",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jamszh/test-release-please.git"
+    "url": "git+https://github.com/x4raynixx/rxn_lib.git"
   },
-  "author": "jamszh",
+  "author": "test",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jamszh/test-release-please/issues"
   },
-  "homepage": "https://github.com/jamszh/test-release-please#readme"
+  "homepage": "https://github.com/x4raynixx/rxn_lib#readme"
 }
