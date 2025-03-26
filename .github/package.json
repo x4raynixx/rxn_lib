@@ -1,0 +1,19 @@
+{
+  "name": "test-release-please",
+  "version": "0.0.1",
+  "description": "just a test",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamszh/test-release-please.git"
+  },
+  "author": "jamszh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamszh/test-release-please/issues"
+  },
+  "homepage": "https://github.com/jamszh/test-release-please#readme"
+}
